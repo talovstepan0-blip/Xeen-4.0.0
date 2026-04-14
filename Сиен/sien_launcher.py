@@ -163,7 +163,7 @@ def create_tray_icon(launcher: SienLauncher):
         menu = pystray.Menu(
             pystray.MenuItem("Показать HUD", on_show_hud),
             pystray.MenuItem("Открыть дашборд", on_dashboard),
-            pystray.Separator(),
+            pystray.MenuItem(None, None, enabled=False),  # Разделитель
             pystray.MenuItem("Выход", on_exit)
         )
         
