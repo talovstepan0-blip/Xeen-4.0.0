@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сиен HUD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">⚡ СИЕН</div>
+            <div class="controls">
+                <button id="minimizeBtn">−</button>
+                <button id="closeBtn">×</button>
+            </div>
+        </header>
+        
+        <nav class="tabs">
+            <button class="tab active" data-tab="chat">💬 Чат</button>
+            <button class="tab" data-tab="tasks">📋 Задачи</button>
+            <button class="tab" data-tab="media">🎬 Медиатека</button>
+            <button class="tab" data-tab="plugins">🔌 Плагины</button>
+            <button class="tab" data-tab="settings">⚙️ Настройки</button>
+        </nav>
+        
+        <main class="content">
+            <!-- Чат -->
+            <div class="tab-content active" id="chat">
+                <div class="messages" id="messages"></div>
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Введите команду...">
+                    <button id="sendBtn">➤</button>
+                    <button id="micBtn">🎤</button>
+                </div>
+            </div>
+            
+            <!-- Задачи -->
+            <div class="tab-content" id="tasks">
+                <div class="task-list" id="taskList"></div>
+                <button class="btn-primary" onclick="createTask()">+ Новая задача</button>
+            </div>
+            
+            <!-- Медиатека -->
+            <div class="tab-content" id="media">
+                <p class="placeholder">Медиатека будет доступна в следующей версии</p>
+            </div>
+            
+            <!-- Плагины -->
+            <div class="tab-content" id="plugins">
+                <div class="plugin-list" id="pluginList"></div>
+            </div>
+            
+            <!-- Настройки -->
+            <div class="tab-content" id="settings">
+                <div class="setting">
+                    <label>Тема</label>
+                    <select id="themeSelect">
+                        <option value="dark">Тёмная</option>
+                        <option value="light">Светлая</option>
+                    </select>
+                </div>
+                <div class="setting">
+                    <label>Голос</label>
+                    <select id="voiceSelect">
+                        <option value="ru">Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="renderer.js"></script>
+</body>
+</html>

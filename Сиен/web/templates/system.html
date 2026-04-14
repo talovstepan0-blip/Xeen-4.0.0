@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Система - Сиен{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>📊 Системные метрики</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+            <canvas id="cpuChart"></canvas>
+        </div>
+        <div>
+            <canvas id="memoryChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+const memoryCtx = document.getElementById('memoryChart').getContext('2d');
+
+const cpuChart = new Chart(cpuCtx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'CPU %',
+            data: [],
+            borderColor: '#00ff88',
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+
+const memoryChart = new Chart(memoryCtx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'RAM %',
+            data: [],
+            borderColor: '#00ccff',
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+
+async function updateMetrics() {
+    const response = await fetch('/api/system/metrics');
+    const data = await response.json();
+    
+    const now = new Date().toLocaleTimeString();
+    
+    cpuChart.data.labels.push(now);
+    cpuChart.data.datasets[0].data.push(data.cpu_percent);
+    
+    memoryChart.data.labels.push(now);
+    memoryChart.data.datasets[0].data.push(data.memory_percent);
+    
+    // Оставляем только последние 20 точек
+    if (cpuChart.data.labels.length > 20) {
+        cpuChart.data.labels.shift();
+        cpuChart.data.datasets[0].data.shift();
+        memoryChart.data.labels.shift();
+        memoryChart.data.datasets[0].data.shift();
+    }
+    
+    cpuChart.update();
+    memoryChart.update();
+}
+
+setInterval(updateMetrics, 5000);
+updateMetrics();
+</script>
+{% endblock %}

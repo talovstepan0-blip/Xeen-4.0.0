@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Профиль - Сиен{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>👤 Профиль пользователя</h2>
+    <form id="profileForm" onsubmit="updateProfile(event)">
+        <label>Имя</label>
+        <input type="text" name="name" value="{{ profile.name if profile else 'User' }}" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" value="{{ profile.email if profile else '' }}">
+        
+        <label>Часовой пояс</label>
+        <select name="timezone">
+            <option value="UTC" {% if profile and profile.timezone == 'UTC' %}selected{% endif %}>UTC</option>
+            <option value="Europe/Moscow" {% if profile and profile.timezone == 'Europe/Moscow' %}selected{% endif %}>Москва (MSK)</option>
+            <option value="Europe/London" {% if profile and profile.timezone == 'Europe/London' %}selected{% endif %}>Лондон (GMT)</option>
+            <option value="America/New_York" {% if profile and profile.timezone == 'America/New_York' %}selected{% endif %}>Нью-Йорк (EST)</option>
+            <option value="Asia/Tokyo" {% if profile and profile.timezone == 'Asia/Tokyo' %}selected{% endif %}>Токио (JST)</option>
+        </select>
+        
+        <button type="submit" class="btn">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function updateProfile(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    const response = await fetch('/dashboard/profile/update', {
+        method: 'POST',
+        body: formData
+    });
+    
+    const result = await response.json();
+    if (result.status === 'success') {
+        alert('Профиль обновлен!');
+    } else {
+        alert('Ошибка обновления профиля');
+    }
+}
+</script>
+{% endblock %}

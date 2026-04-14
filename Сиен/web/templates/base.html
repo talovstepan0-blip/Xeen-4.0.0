@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Сиен Дашборд{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background: #12121a;
+            position: fixed;
+            height: 100vh;
+            padding: 20px;
+            border-right: 1px solid #2a2a3a;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .nav-link {
+            display: block;
+            padding: 12px 15px;
+            color: #a0a0b0;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: #1a1a2a;
+            color: #00ff88;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+        .card {
+            background: #12121a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #2a2a3a;
+        }
+        .card h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #00ff88;
+            color: #0a0a0f;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #00cc6a;
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: #ff4444;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+        input, select {
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: #e0e0e0;
+            padding: 10px 15px;
+            border-radius: 6px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #a0a0b0;
+        }
+        .status-online { color: #00ff88; }
+        .status-offline { color: #ff4444; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        th { color: #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">⚡ СИЕН</div>
+        <nav>
+            <a href="/dashboard/profile" class="nav-link {% if request.url.path == '/dashboard/profile' %}active{% endif %}">👤 Профиль</a>
+            <a href="/dashboard/agents" class="nav-link {% if request.url.path == '/dashboard/agents' %}active{% endif %}">🤖 Агенты</a>
+            <a href="/dashboard/autostart" class="nav-link {% if request.url.path == '/dashboard/autostart' %}active{% endif %}">🚀 Автозагрузка</a>
+            <a href="/dashboard/system" class="nav-link {% if request.url.path == '/dashboard/system' %}active{% endif %}">📊 Система</a>
+        </nav>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Автозагрузка - Сиен{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>🚀 Автозагрузка</h2>
+    <p style="margin-bottom: 20px; color: #a0a0b0;">
+        Включите автозагрузку, чтобы Сиен запускался автоматически при старте Windows.
+    </p>
+    
+    <form id="autostartForm" onsubmit="toggleAutostart(event)">
+        <input type="hidden" name="enable" value="{{ 'false' if enabled else 'true' }}">
+        <button type="submit" class="btn {{ 'btn-danger' if enabled else '' }}">
+            {{ 'Отключить' if enabled else 'Включить' }} автозагрузку
+        </button>
+    </form>
+    
+    <p style="margin-top: 15px; color: {{ '#00ff88' if enabled else '#ff4444' }};">
+        Статус: {{ 'Включено' if enabled else 'Отключено' }}
+    </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function toggleAutostart(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    const response = await fetch('/dashboard/autostart/toggle', {
+        method: 'POST',
+        body: formData
+    });
+    
+    location.reload();
+}
+</script>
+{% endblock %}
