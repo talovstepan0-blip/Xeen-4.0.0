@@ -1,0 +1,106 @@
+# Файл: config/settings.yaml
+# Конфигурация проекта "Сиен"
+
+# Основные настройки
+app:
+  name: "Сиен"
+  version: "1.0.0"
+  debug: false
+  log_level: "INFO"
+
+# Сетевые настройки
+server:
+  host: "0.0.0.0"
+  orchestrator_port: 8000
+  dashboard_port: 8001
+  
+# Порты агентов
+agents:
+  argus: 8003
+  cronos: 8004
+  ahill: 8005
+  fenix: 8006
+  logos: 8007
+  wen: 8008
+  hermes: 8009
+  apollo: 8010
+  dike: 8011
+  mnemon: 8012
+  kun: 8013
+  master: 8014
+  plutos: 8015
+  musa: 8016
+  kallio: 8017
+  hefest: 8018
+  auto: 8019
+  huei: 8020
+  meng: 8021
+  echo: 8022
+  irida: 8023
+
+# База данных
+database:
+  path: "data/sien.db"
+  backup_enabled: true
+  backup_interval_hours: 24
+
+# Безопасность
+security:
+  jwt_secret_key: "CHANGE_THIS_SECRET_KEY_IN_PRODUCTION"
+  jwt_algorithm: "HS256"
+  token_expire_minutes: 60
+  rate_limit_requests: 100
+  rate_limit_window_seconds: 60
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://localhost:8000"
+    - "http://127.0.0.1:8000"
+
+# Логирование
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/sien.log"
+  max_size_mb: 10
+  backup_count: 5
+  json_format: false
+
+# Очереди задач
+task_queue:
+  max_size: 1000
+  retry_attempts: 3
+  retry_delay_seconds: 5
+  task_timeout_seconds: 300
+
+# Агенты (расширенная конфигурация)
+agent_settings:
+  fenix:
+    model: "default"
+    timeout: 30
+  wen:
+    auto_reminder: true
+    reminder_check_interval_minutes: 5
+  argus:
+    search_engine: "duckduckgo"
+    max_results: 10
+  hefest:
+    code_timeout: 60
+  huei:
+    image_size: "512x512"
+    steps: 20
+
+# Мониторинг
+monitoring:
+  enabled: true
+  metrics_interval_seconds: 30
+  health_check_interval_seconds: 10
+  trace_requests: false
+
+# Автозапуск
+autostart:
+  enabled: true
+  delay_seconds: 2
+  critical_agents:
+    - orchestrator
+    - fenix
+    - wen
