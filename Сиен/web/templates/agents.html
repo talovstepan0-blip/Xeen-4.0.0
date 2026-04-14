@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Агенты - Сиен{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>🤖 Агенты</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Агент</th>
+                <th>Порт</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agent in agents %}
+            <tr>
+                <td>{{ agent.name }}</td>
+                <td>{{ agent.port }}</td>
+                <td>{{ agent.description }}</td>
+                <td class="status-{{ agent.status }}">{{ agent.status }}</td>
+                <td><button class="btn" onclick="restartAgent('{{ agent.name }}')">↻ Перезапуск</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function restartAgent(name) {
+    alert('Перезапуск агента "' + name + '" (заглушка)');
+}
+</script>
+{% endblock %}

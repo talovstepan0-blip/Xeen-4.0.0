@@ -1,0 +1,210 @@
+/* Файл: hud/styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #12121a;
+    border-bottom: 1px solid #2a2a3a;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ff88;
+}
+
+.controls button {
+    background: transparent;
+    border: none;
+    color: #a0a0b0;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.controls button:hover {
+    color: #00ff88;
+}
+
+.tabs {
+    display: flex;
+    padding: 10px 20px;
+    background: #12121a;
+    gap: 10px;
+}
+
+.tab {
+    background: transparent;
+    border: 1px solid #2a2a3a;
+    color: #a0a0b0;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.tab:hover {
+    background: #1a1a2a;
+    color: #e0e0e0;
+}
+
+.tab.active {
+    background: #00ff88;
+    color: #0a0a0f;
+    border-color: #00ff88;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Чат */
+.messages {
+    height: calc(100% - 80px);
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.message.user {
+    background: #1a1a2a;
+    margin-left: auto;
+    border: 1px solid #00ff88;
+}
+
+.message.assistant {
+    background: #12121a;
+    border: 1px solid #2a2a3a;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    background: #1a1a2a;
+    border: 1px solid #2a2a3a;
+    color: #e0e0e0;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: #00ff88;
+}
+
+.input-area button {
+    background: #00ff88;
+    border: none;
+    color: #0a0a0f;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.input-area button:hover {
+    background: #00cc6a;
+}
+
+/* Задачи */
+.task-item {
+    background: #12121a;
+    border: 1px solid #2a2a3a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.task-item.completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.btn-primary {
+    background: #00ff88;
+    border: none;
+    color: #0a0a0f;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Настройки */
+.setting {
+    margin-bottom: 20px;
+}
+
+.setting label {
+    display: block;
+    margin-bottom: 8px;
+    color: #a0a0b0;
+}
+
+.setting select {
+    background: #1a1a2a;
+    border: 1px solid #2a2a3a;
+    color: #e0e0e0;
+    padding: 10px 15px;
+    border-radius: 6px;
+    width: 200px;
+}
+
+.placeholder {
+    color: #666;
+    text-align: center;
+    padding: 50px;
+}
+
+/* Анимация печатания */
+@keyframes typing {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.typing {
+    animation: typing 0.3s ease-in;
+}
